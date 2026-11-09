@@ -102,7 +102,7 @@ class AddToCartView(CartMixin, View):
                     "success": True,
                     "total_items": cart.total_items,
                     "message": f"{product.name} added to cart",
-                    "cart_item_id": cart.item.id,
+                    "cart_item_id": cart_item.id,
                 }
             )
 
