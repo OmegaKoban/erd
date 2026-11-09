@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, DetailView
-from django.http import HttpResponse
-from django.template.response import TemplateResponse
-from .models import Category, Product, Size
 from django.db.models import Q
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.template.response import TemplateResponse
+from django.views.generic import DetailView, TemplateView
+
+from .models import Category, Product, Size
 
 
 class IndexView(TemplateView):
@@ -27,8 +28,8 @@ class CatalogView(TemplateView):
 
     FILTER_MAPPING = {
         "color": lambda queryset, value: queryset.filter(color__iexact=value),
-        "min_price": lambda queryset, value: queryset.filter(price_gte=value),
-        "max_price": lambda queryset, value: queryset.filter(price_lte=value),
+        "min_price": lambda queryset, value: queryset.filter(price__gte=value),
+        "max_price": lambda queryset, value: queryset.filter(price__lte=value),
         "size": lambda queryset, value: queryset.filter(
             product_sizes__size__name=value
         ),
